@@ -1,8 +1,10 @@
-# chef-express `(ノಠ益ಠ)ノ`
+# chef-express
 
-<a href="https://badge.fury.io/js/%40jacekpietal%2Fbouncer.js"><img src="https://badge.fury.io/js/%40jacekpietal%2Fbouncer.js.svg" alt="npm package version" /></a>
-<a href="https://img.shields.io/npm/dt/@jacekpietal/bouncer.js"><img src="https://img.shields.io/npm/dt/@jacekpietal/bouncer.js" alt="downloads total" /></a>
-<a href="https://circleci.com/gh/Prozi/bouncer.js"><img src="https://circleci.com/gh/Prozi/bouncer.js.svg?style=shield" alt="tests status" /></a>
+<a href="https://badge.fury.io/js/chef-express"><img src="https://badge.fury.io/js/chef-express.svg" alt="npm package version" /></a>
+<a href="https://img.shields.io/npm/dt/chef-express"><img src="https://img.shields.io/npm/dt/chef-express" alt="downloads total" /></a>
+<a href="https://circleci.com/gh/Prozi/chef-express"><img src="https://circleci.com/gh/Prozi/chef-express?style=shield" alt="tests status" /></a>
+
+<img src="https://raw.githubusercontent.com/Prozi/chef-express/main/chef.png" width="100%" />
 
 **static files server** designed for **node** written in **typescript**, with **tests**
 
