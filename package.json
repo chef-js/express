@@ -1,6 +1,6 @@
 {
   "name": "chef-express",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "chef-js + express = static files server",
   "main": "index.js",
   "bin": "./bin/chef-express",
@@ -15,7 +15,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "chef-core": "^1.0.0",
+    "chef-core": "^1.0.1",
     "express": "^4.17.2"
   },
   "devDependencies": {

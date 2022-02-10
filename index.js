@@ -1,8 +1,8 @@
 const { default: startServer } = require("./dist");
 
-module.exports = async function start(config) {
+module.exports = async function start(userConfig = {}) {
   return await startServer({
-    ...config,
+    ...userConfig,
     type: "express",
   });
 };
