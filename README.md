@@ -4,9 +4,7 @@
 <a href="https://img.shields.io/npm/dt/@jacekpietal/bouncer.js"><img src="https://img.shields.io/npm/dt/@jacekpietal/bouncer.js" alt="downloads total" /></a>
 <a href="https://circleci.com/gh/Prozi/bouncer.js"><img src="https://circleci.com/gh/Prozi/bouncer.js.svg?style=shield" alt="tests status" /></a>
 
-**web-sockets** micro-service manager and **static files server** at the same port,
-
-designed for **node** written in **typescript**, with **tests**
+**static files server** designed for **node** written in **typescript**, with **tests**
 
 - `express` for serving files
 
