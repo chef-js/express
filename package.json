@@ -1,8 +1,15 @@
 {
   "name": "chef-express",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "chef-js + express = static files server",
   "main": "index.js",
+  "keywords": [
+    "chef-js",
+    "server",
+    "static-serve",
+    "http-server",
+    "express"
+  ],
   "bin": "./bin/chef-express",
   "types": "./dist/index.d.ts",
   "files": ["dist"],
