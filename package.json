@@ -1,10 +1,10 @@
 {
   "name": "chef-express",
-  "version": "1.0.3",
-  "description": "chef + express = static files server",
+  "version": "1.0.4",
+  "description": "chef-js + express = static files server",
   "main": "index.js",
   "bin": "./bin/chef-express",
-  "repository": "https://github.com/Prozi/chef-express",
+  "repository": "https://github.com/chef-js/express.git",
   "author": "Jacek Pietal <Prozi>",
   "license": "MIT",
   "private": false,
