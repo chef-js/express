@@ -1,7 +1,7 @@
 {
   "name": "chef-express",
   "version": "1.0.3",
-  "description": "bouncer.js + express = static files server",
+  "description": "chef + express = static files server",
   "main": "index.js",
   "bin": "./bin/chef-express",
   "repository": "https://github.com/Prozi/chef-express",

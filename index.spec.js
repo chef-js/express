@@ -9,20 +9,20 @@ describe('GIVEN bouncer is provided', () => {
     it('THEN it should initialize without throwing error', () => {
       const { startServer } = require('./dist')
 
-      expect(() => startServer({ port: 3001 })).not.toThrow()
+      expect(() => startServer({ folder: 'demo', port: 3001 })).not.toThrow()
     })
 
     it('THEN initialization should return a truthy instance', async () => {
       const { startServer } = require('./dist')
 
-      expect(await startServer({ port: 3002 })).toBeTruthy()
+      expect(await startServer({ folder: 'demo', port: 3002 })).toBeTruthy()
     })
   })
 
   describe('WHEN bouncer is initialized in debug mode', () => {
     it('THEN it should not throw error', async () => {
       const { startServer } = require('./dist')
-      const api = await startServer({ debug: true, port: 3003 })
+      const api = await startServer({ debug: true, folder: 'demo', port: 3003 })
 
       expect(api).toBeTruthy()
     })
@@ -41,7 +41,7 @@ describe('GIVEN bouncer is provided', () => {
   describe('WHEN bouncer is initialized on specified port', () => {
     it('THEN it should start without error', async () => {
       const { startServer } = require('./dist')
-      const server = await startServer({ port: 8080 })
+      const server = await startServer({ folder: 'demo', port: 8080 })
 
       expect(server).toBeTruthy()
     })

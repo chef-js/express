@@ -11,12 +11,8 @@ jobs:
     steps:
       # apt prepare
       - run: sudo apt update --fix-missing
-      - run: sudo apt install -y nodejs npm node-gyp nodejs-dev libssl1.0-dev clang gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+      - run: sudo apt install -y nodejs npm node-gyp nodejs-dev libssl1.0-dev # clang gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
       # verify
-      - run: clang --version
-      - run: clang++ --version
-      - run: aarch64-linux-gnu-gcc --version
-      - run: aarch64-linux-gnu-g++ --version
       - run: node --version
       - run: npm --version
       # make cache folder (if missing) and take ownership
@@ -34,7 +30,7 @@ jobs:
       # test here to reuse all of above (same job)
       - checkout
       - run: yarn
-      - run: yarn test
+      - run: yarn test --forceExit
 workflows:
   version: 2
   test:

@@ -1,10 +1,8 @@
 # chef-express
 
-<a href="https://badge.fury.io/js/chef-express"><img src="https://badge.fury.io/js/chef-express.svg" alt="npm package version" /></a>
-<a href="https://img.shields.io/npm/dt/chef-express"><img src="https://img.shields.io/npm/dt/chef-express" alt="downloads total" /></a>
-<a href="https://circleci.com/gh/Prozi/chef-express"><img src="https://circleci.com/gh/Prozi/chef-express?style=shield" alt="tests status" /></a>
+<img style="max-width: 100%;" src="https://raw.githubusercontent.com/Prozi/chef-express/main/chef.png" width="150" />
 
-<img src="https://raw.githubusercontent.com/Prozi/chef-express/main/chef.png" width="100%" />
+<a href="https://badge.fury.io/js/chef-express"><img src="https://badge.fury.io/js/chef-express.svg" alt="npm package version" /></a> <a href="https://circleci.com/gh/Prozi/chef-express"><img src="https://circleci.com/gh/Prozi/chef-express.svg?style=shield" alt="tests status" /></a>
 
 **static files server** designed for **node** written in **typescript**, with **tests**
 
