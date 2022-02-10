@@ -1,42 +1,48 @@
 "use strict";
-var __importDefault =
-  (this && this.__importDefault) ||
-  function (mod) {
-    return mod && mod.__esModule ? mod : { default: mod };
-  };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const cache_1 = __importDefault(require("../cache"));
-const express_1 = __importDefault(require("./express"));
-const static_files_js_1 = __importDefault(require("./static-files.js"));
-const config_js_1 = __importDefault(require("../config.js"));
-async function startServer(userConfig = {}) {
-  const config = { ...config_js_1.default, ...userConfig };
-  // create the express or uws server inside a wrapper
-  const server = await (0, express_1.default)();
-  // create the static files reader based on folder
-  const fileReader = (0, static_files_js_1.default)(config.folder);
-  // and create a cache for above
-  const fileReaderCache = new cache_1.default(fileReader);
-  // everything goes to the reader
-  server.get("/*", (res, req, next) => {
-    const url = getUrl(req.originalUrl);
-    const { status, mime, body } = fileReaderCache.get(url);
-    if (config.debug) {
-      console.info(status, mime, url);
+exports.requestHandler = exports.createServer = void 0;
+const http_1 = __importDefault(require("http"));
+const express_1 = __importDefault(require("express"));
+const get_url_1 = __importDefault(require("chef-core/dist/server/get-url"));
+const config_1 = __importDefault(require("chef-core/dist/config"));
+async function createServer(_config) {
+    const app = (0, express_1.default)();
+    const server = http_1.default.createServer(app);
+    // WSGet compatible, this = method: string
+    function expressReader(path, wsGet) {
+        const action = app[this.toLowerCase()];
+        if (action) {
+            action.call(app, path, (req, res, next) => wsGet(res, req, next));
+        }
     }
-    // header sets content type
-    res.header("Content-Type", mime);
-    // write header sets status
-    res.writeHeader(status);
-    res.end(body);
-  });
-  // finally start the server on process.env.PORT || 4200
-  await server.listen(config.port);
-  return server;
+    return {
+        async listen(port) {
+            return new Promise((resolve) => {
+                // ensure port is number
+                server.listen(+port, () => resolve(server));
+            });
+        },
+        get: expressReader.bind("GET"),
+        post: expressReader.bind("POST"),
+        any: expressReader.bind("ANY"),
+    };
 }
-exports.default = startServer;
-function getUrl(url) {
-  return decodeURIComponent(
-    url.replace(/^\/+/, "").split("?")[0].split("#")[0]
-  );
+exports.createServer = createServer;
+function requestHandler(fileReaderCache) {
+    return (res, req) => {
+        const url = (0, get_url_1.default)(req.originalUrl);
+        const { status, mime, body } = fileReaderCache.get(url);
+        if (config_1.default.debug) {
+            console.info(status, mime, url);
+        }
+        // header sets content type
+        res.header("Content-Type", mime);
+        // write header sets status
+        res.writeHeader(status);
+        res.end(body);
+    };
 }
+exports.requestHandler = requestHandler;

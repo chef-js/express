@@ -1,25 +1,47 @@
-import Cache from "../cache";
-import createServer from "./express";
-import createFileReader from "./static-files.js";
-import { WSConfig, WSServer } from "../types.js";
-import baseConfig from "../config.js";
+import http from "http";
+import express from "express";
+import Cache from "chef-core/dist/cache";
+import {
+  WSConfig,
+  WSGet,
+  WSServer,
+} from "chef-core/dist/types";
+import getUrl from "chef-core/dist/server/get-url";
+import config from "chef-core/dist/config";
 
-export default async function startServer(
-  userConfig: any = {}
-): Promise<WSServer> {
-  const config: WSConfig = { ...baseConfig, ...userConfig };
+export async function createServer(_config: WSConfig): Promise<WSServer> {
+  const app: any = express();
+  const server = http.createServer(app);
 
-  // create the express or uws server inside a wrapper
-  const server: any = await createServer();
+  // WSGet compatible, this = method: string
+  function expressReader(path: string, wsGet: WSGet): void {
+    const action = app[this.toLowerCase()];
 
-  // create the static files reader based on folder
-  const fileReader: (url: string) => any = createFileReader(config.folder);
+    if (action) {
+      action.call(
+        app,
+        path,
+        (req: Express.Request, res: Express.Response, next: any) =>
+          wsGet(res, req, next)
+      );
+    }
+  }
 
-  // and create a cache for above
-  const fileReaderCache: { get: (url: string) => any } = new Cache(fileReader);
+  return {
+    async listen(port: number): Promise<any> {
+      return new Promise((resolve) => {
+        // ensure port is number
+        server.listen(+port, () => resolve(server));
+      });
+    },
+    get: expressReader.bind("GET"),
+    post: expressReader.bind("POST"),
+    any: expressReader.bind("ANY"),
+  };
+}
 
-  // everything goes to the reader
-  server.get("/*", (res: any, req: any, next?: any) => {
+export function requestHandler(fileReaderCache: Cache) {
+  return (res: any, req: any) => {
     const url: string = getUrl(req.originalUrl);
     const { status, mime, body } = fileReaderCache.get(url);
 
@@ -33,16 +55,5 @@ export default async function startServer(
     res.writeHeader(status);
 
     res.end(body);
-  });
-
-  // finally start the server on process.env.PORT || 4200
-  await server.listen(config.port);
-
-  return server;
-}
-
-function getUrl(url: string): string {
-  return decodeURIComponent(
-    url.replace(/^\/+/, "").split("?")[0].split("#")[0]
-  );
+  };
 }

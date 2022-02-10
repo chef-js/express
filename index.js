@@ -1,4 +1,4 @@
-const { startServer } = require("./dist");
+const { default: startServer } = require("./dist");
 
 module.exports = async function start(config) {
   return await startServer({
