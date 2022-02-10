@@ -1,0 +1,14 @@
+{
+  "name": "chef-express",
+  "version": "1.0.0",
+  "description": "bouncer.js + express = static files server",
+  "main": "index.js",
+  "repository": "https://github.com/Prozi/chef-express",
+  "author": "Jacek Pietal <Prozi>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@jacekpietal/bouncer.js": "^3.4.1",
+    "express": "^4.17.2"
+  }
+}
