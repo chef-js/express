@@ -1,6 +1,6 @@
 {
   "name": "chef-express",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "chef-js + express = static files server",
   "main": "index.js",
   "keywords": [
@@ -15,18 +15,21 @@
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
-    "bin"
+    "bin",
+    "ssl"
   ],
-  "repository": "https://github.com/chef-js/express.git",
+  "repository": "git://github.com/chef-js/express.git",
   "author": "Jacek Pietal <Prozi>",
   "license": "MIT",
   "private": false,
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "start": "bin/chef-express demo",
+    "precommit": "yarn build && npx prettier . --write"
   },
   "dependencies": {
-    "chef-core": "^1.0.2",
+    "chef-core": "^1.0.5",
     "express": "^4.17.2"
   },
   "devDependencies": {

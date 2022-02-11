@@ -7,12 +7,14 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.requestHandler = exports.createServer = void 0;
 const http_1 = __importDefault(require("http"));
+const https_1 = __importDefault(require("https"));
 const express_1 = __importDefault(require("express"));
 const get_url_1 = __importDefault(require("chef-core/dist/server/get-url"));
 const config_1 = __importDefault(require("chef-core/dist/config"));
-async function createServer(_config) {
+const fs_1 = require("fs");
+async function createServer(config) {
   const app = (0, express_1.default)();
-  const server = http_1.default.createServer(app);
+  const server = createExpressServer(config, app);
   // WSGet compatible, this = method: string
   function expressReader(path, wsGet) {
     const action = app[this.toLowerCase()];
@@ -33,6 +35,21 @@ async function createServer(_config) {
   };
 }
 exports.createServer = createServer;
+function createExpressServer(config, app) {
+  // spread ssl from config
+  const { ssl } = config;
+  // if config key and cert present
+  if (ssl?.key && ssl?.cert) {
+    const { key, cert } = ssl;
+    // start ssl app and finish
+    return https_1.default.createServer(
+      { key: (0, fs_1.readFileSync)(key), cert: (0, fs_1.readFileSync)(cert) },
+      app
+    );
+  }
+  // else start normal app
+  return http_1.default.createServer(app);
+}
 function requestHandler(fileReaderCache) {
   return (res, req) => {
     const url = (0, get_url_1.default)(req.originalUrl);
