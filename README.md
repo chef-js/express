@@ -11,7 +11,7 @@
 ## Running
 
 ```bash
-$ [PORT=4200] yarn chef-express folder [--debug]
+$ [PORT=4200] yarn chef-express folder [--debug] [--ssl] [--key example.key] [--cert example.crt]
 ```
 
 ```ts
@@ -25,9 +25,9 @@ startServer({
   // folder to static server files
   folder: process.argv[2],
   // ssl = undefined | { key, cert }
-  ssl: undefined,
+  ssl: process.argv.includes("--ssl") ? ssl : undefined,
 }).then((server) => {
-  // server api is get, post, any
+  // server router api is get, post, any
   server.any("/*", (res, req) => {
     res.end("200 OK");
   });
@@ -37,6 +37,9 @@ startServer({
 - `PORT=4200` - choose server port
 - `folder` - folder you want to server static files from
 - `--debug` - show logs
+- `--ssl` - start as https server, with self signed certificate
+- `--key example.key` - path to real certificate key, use with `--ssl`
+- `--cert example.crt` - path to real certificate, use with `--ssl`
 
 ## Install
 
