@@ -1,6 +1,6 @@
 {
   "name": "chef-express",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "chef-js + express = static files server",
   "main": "index.js",
   "keywords": [
