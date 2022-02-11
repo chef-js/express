@@ -1,11 +1,7 @@
 import http from "http";
 import express from "express";
 import Cache from "chef-core/dist/cache";
-import {
-  WSConfig,
-  WSGet,
-  WSServer,
-} from "chef-core/dist/types";
+import { WSConfig, WSGet, WSServer } from "chef-core/dist/types";
 import getUrl from "chef-core/dist/server/get-url";
 import config from "chef-core/dist/config";
 

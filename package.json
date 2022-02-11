@@ -1,6 +1,6 @@
 {
   "name": "chef-express",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "chef-js + express = static files server",
   "main": "index.js",
   "keywords": [
@@ -8,11 +8,15 @@
     "server",
     "static-serve",
     "http-server",
-    "express"
+    "express",
+    "spa"
   ],
   "bin": "./bin/chef-express",
   "types": "./dist/index.d.ts",
-  "files": ["dist", "bin"],
+  "files": [
+    "dist",
+    "bin"
+  ],
   "repository": "https://github.com/chef-js/express.git",
   "author": "Jacek Pietal <Prozi>",
   "license": "MIT",
