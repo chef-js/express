@@ -1,6 +1,6 @@
 {
   "name": "chef-express",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "chef-js + express = static files server",
   "main": "index.js",
   "keywords": [
@@ -35,7 +35,7 @@
     "precommit": "yarn build && npx prettier . --write"
   },
   "dependencies": {
-    "chef-core": "^1.0.7",
+    "chef-core": "^1.0.8",
     "express": "^4.17.2"
   },
   "devDependencies": {

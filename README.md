@@ -22,7 +22,7 @@ startServer({
   debug: process.argv.includes("--debug"),
   // port on which the server listens
   port: Number(process.env.PORT || 4200),
-  // folder to static server files
+  // folder to static serve files
   folder: process.argv[2],
   // ssl = undefined | { key, cert }
   ssl: process.argv.includes("--ssl") ? ssl : undefined,
