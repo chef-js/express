@@ -40,7 +40,7 @@ function createExpressServer(config, app) {
   return http_1.default.createServer(app);
 }
 function requestHandler(fileReaderCache) {
-  return (res, req) => {
+  return (req, res) => {
     const url = (0, get_url_1.default)(req.originalUrl);
     const { status, mime, body } = fileReaderCache.get(url);
     if (config_1.default.debug) {
@@ -49,7 +49,7 @@ function requestHandler(fileReaderCache) {
     // header sets content type
     res.header("Content-Type", mime);
     // write header sets status
-    res.writeHeader(status);
+    res.writeHead(status);
     res.end(body);
   };
 }

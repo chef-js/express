@@ -1,6 +1,6 @@
 import http, { RequestListener } from "http";
 import https from "https";
-import express from "express";
+import express, { Request, Response } from "express";
 import Cache from "chef-core/dist/cache";
 import { WSConfig, WSServer } from "chef-core/dist/types";
 import getUrl from "chef-core/dist/server/get-url";
@@ -44,7 +44,7 @@ function createExpressServer(
 }
 
 export function requestHandler(fileReaderCache: Cache) {
-  return (res: any, req: any) => {
+  return (req: Request, res: Response) => {
     const url: string = getUrl(req.originalUrl);
     const { status, mime, body } = fileReaderCache.get(url);
 
@@ -55,7 +55,7 @@ export function requestHandler(fileReaderCache: Cache) {
     // header sets content type
     res.header("Content-Type", mime);
     // write header sets status
-    res.writeHeader(status);
+    res.writeHead(status);
 
     res.end(body);
   };
