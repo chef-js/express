@@ -11,7 +11,7 @@
 ## Running
 
 ```bash
-$ [PORT=4200] yarn chef-express folder [--debug] [--ssl] [--key example.key] [--cert example.crt]
+$ [PORT=4200] [yarn|npx] chef-express folder [--debug] [--ssl] [--key example.key] [--cert example.crt]
 ```
 
 ```ts
@@ -26,9 +26,9 @@ startServer({
   folder: process.argv[2],
   // ssl = undefined | { key, cert }
   ssl: process.argv.includes("--ssl") ? ssl : undefined,
-}).then((server) => {
+}).then((server: Express.Application) => {
   // server router api is get, post, any
-  server.any("/*", (res, req) => {
+  server.any("/*", (req, res) => {
     res.end("200 OK");
   });
 });

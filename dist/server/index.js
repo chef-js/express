@@ -15,24 +15,13 @@ const fs_1 = require("fs");
 async function createServer(config) {
   const app = (0, express_1.default)();
   const server = createExpressServer(config, app);
-  // WSGet compatible, this = method: string
-  function expressReader(path, wsGet) {
-    const action = app[this.toLowerCase()];
-    if (action) {
-      action.call(app, path, (req, res, next) => wsGet(res, req, next));
-    }
-  }
-  return {
-    async listen(port) {
-      return new Promise((resolve) => {
-        // ensure port is number
-        server.listen(+port, () => resolve(server));
-      });
-    },
-    get: expressReader.bind("GET"),
-    post: expressReader.bind("POST"),
-    any: expressReader.bind("ANY"),
+  app.start = function (port) {
+    return new Promise((resolve) => {
+      // ensure port is number
+      server.listen(+port, () => resolve(app));
+    });
   };
+  return app;
 }
 exports.createServer = createServer;
 function createExpressServer(config, app) {
