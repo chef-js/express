@@ -6,7 +6,7 @@
 
 **static files server** designed for **node** written in **typescript**, with **tests**
 
-- `express` for serving files
+- `express` for routing
 
 ## Running
 
