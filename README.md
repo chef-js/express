@@ -28,7 +28,7 @@ startServer({
   ssl: process.argv.includes("--ssl") ? ssl : undefined,
 }).then((server: Express.Application) => {
   // server router api is get, post, any
-  server.any("/*", (req, res) => {
+  server.any("/*", (req: Express.Request, res: Express.Response) => {
     res.end("200 OK");
   });
 });
