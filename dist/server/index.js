@@ -9,9 +9,9 @@ exports.requestHandler = exports.createServer = void 0;
 const http_1 = __importDefault(require("http"));
 const https_1 = __importDefault(require("https"));
 const express_1 = __importDefault(require("express"));
-const get_url_1 = __importDefault(require("chef-core/dist/server/get-url"));
-const config_1 = __importDefault(require("chef-core/dist/config"));
 const fs_1 = require("fs");
+const config_1 = require("chef-core/config");
+const chef_core_1 = require("chef-core");
 async function createServer(config) {
   const app = (0, express_1.default)();
   const server = createExpressServer(config, app);
@@ -41,9 +41,9 @@ function createExpressServer(config, app) {
 }
 function requestHandler(fileReaderCache) {
   return (req, res) => {
-    const url = (0, get_url_1.default)(req.originalUrl);
+    const url = (0, chef_core_1.getUrl)(req.originalUrl);
     const { status, mime, body } = fileReaderCache.get(url);
-    if (config_1.default.debug) {
+    if (config_1.debug) {
       console.info(status, mime, url);
     }
     // header sets content type

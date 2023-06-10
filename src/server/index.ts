@@ -2,10 +2,9 @@ import http, { RequestListener } from "http";
 import https from "https";
 import express, { Request, Response } from "express";
 import { Cache } from "latermom";
-import { WSConfig, WSFileReaderResponse, WSServer } from "chef-core/dist/types";
-import getUrl from "chef-core/dist/server/get-url";
-import config from "chef-core/dist/config";
 import { readFileSync } from "fs";
+import { debug } from "chef-core/config";
+import { WSConfig, WSServer, WSFileReaderResponse, getUrl } from "chef-core";
 
 export async function createServer(config: WSConfig): Promise<WSServer> {
   const app: Express.Application = express();
@@ -48,7 +47,7 @@ export function requestHandler(fileReaderCache: Cache<WSFileReaderResponse>) {
     const url: string = getUrl(req.originalUrl);
     const { status, mime, body } = fileReaderCache.get(url);
 
-    if (config.debug) {
+    if (debug) {
       console.info(status, mime, url);
     }
 
