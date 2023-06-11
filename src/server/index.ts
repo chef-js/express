@@ -4,24 +4,24 @@ import express, { Request, Response } from "express";
 import { Cache } from "latermom";
 import { readFileSync } from "fs";
 import { debug } from "chef-core/config";
-import { WSConfig, WSServer, WSFileReaderResponse, getUrl } from "chef-core";
+import { Config, Server, FileReaderResponse, getUrl } from "chef-core";
 
-export async function createServer(config: WSConfig): Promise<WSServer> {
+export async function createServer(config: Config): Promise<Server> {
   const app: Express.Application = express();
   const server: http.Server | https.Server = createExpressServer(config, app);
 
-  (app as WSServer).start = function (port: number) {
+  (app as Server).start = function (port: number) {
     return new Promise((resolve) => {
       // ensure port is number
-      server.listen(+port, () => resolve(app as WSServer));
+      server.listen(+port, () => resolve(app as Server));
     });
   };
 
-  return app as WSServer;
+  return app as Server;
 }
 
 function createExpressServer(
-  config: WSConfig,
+  config: Config,
   app: Express.Application
 ): http.Server | https.Server {
   // spread ssl from config
@@ -42,7 +42,7 @@ function createExpressServer(
   return http.createServer(app);
 }
 
-export function requestHandler(fileReaderCache: Cache<WSFileReaderResponse>) {
+export function requestHandler(fileReaderCache: Cache<FileReaderResponse>) {
   return (req: Request, res: Response) => {
     const url: string = getUrl(req.originalUrl);
     const { status, mime, body } = fileReaderCache.get(url);
