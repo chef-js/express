@@ -1,6 +1,6 @@
 # chef-express
 
-<img style="max-width: 100%;" src="https://raw.githubusercontent.com/chef-js/express/main/chef.png" width="150" />
+<img style="max-width: 100%; float: right;" src="https://raw.githubusercontent.com/chef-js/core/main/chef.svg" alt="kisscc0" width="200" height="200" />
 
 <a href="https://badge.fury.io/js/chef-express"><img src="https://badge.fury.io/js/chef-express.svg" alt="npm package version" /></a> <a href="https://circleci.com/gh/chef-js/express"><img src="https://circleci.com/gh/chef-js/express.svg?style=shield" alt="tests status" /></a>
 
@@ -17,16 +17,10 @@ $ [PORT=4200] [yarn|npx] chef-express folder [--debug] [--ssl] [--key example.ke
 ```ts
 const startServer = require("chef-express");
 
-startServer({
-  // this enables http/ws logs
-  debug: process.argv.includes("--debug"),
-  // port on which the server listens
-  port: Number(process.env.PORT || 4200),
-  // folder to static serve files
-  folder: process.argv[2],
-  // ssl = undefined | { key, cert }
-  ssl: process.argv.includes("--ssl") ? ssl : undefined,
-}).then((server: Express.Application) => {
+// see https://github.com/chef-js/core#configuration
+const config = {};
+
+startServer(config).then((server: Express.Application) => {
   // server router api is get, post, any
   server.any("/*", (req: Express.Request, res: Express.Response) => {
     res.end("200 OK");
