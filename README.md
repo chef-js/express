@@ -8,17 +8,23 @@
 
 - `express` for routing
 
-## Running
+## Command-Line Running
 
 ```bash
-$ [PORT=4200] [yarn|npx] chef-express folder [--debug] [--ssl] [--key example.key] [--cert example.crt]
+$ npx chef-express folder [--debug] [--ssl] [--port 443] [--maxCacheSize 0]
 ```
+
+## Installation
+
+```bash
+$ yarn add chef-express
+```
+
+Minimal configuration is specifying folder, then it serves it from http://localhost:4200
 
 ```ts
 const startServer = require("chef-express");
-
-// see https://github.com/chef-js/core#configuration
-const config = {};
+const config = { folder: "docs" };
 
 startServer(config).then((server: Express.Application) => {
   // server router api is get, post, any
@@ -26,19 +32,6 @@ startServer(config).then((server: Express.Application) => {
     res.end("200 OK");
   });
 });
-```
-
-- `PORT=4200` - choose server port
-- `folder` - folder you want to serve static files from
-- `--debug` - show logs
-- `--ssl` - start as https server, with self signed certificate
-- `--key example.key` - path to real certificate key, use with `--ssl`
-- `--cert example.crt` - path to real certificate, use with `--ssl`
-
-## Install
-
-```bash
-$ yarn add chef-express
 ```
 
 ## License
