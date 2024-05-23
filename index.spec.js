@@ -25,7 +25,7 @@ describe("GIVEN chef is provided", () => {
 
       expect(
         () =>
-          startChef({ type: "uws", folder: "demo", port: 3012 }).__proto__.head
+          startChef({ type: "uws", folder: "demo", port: 3012 }).__proto__.head,
       ).toBeTruthy();
     });
   });
