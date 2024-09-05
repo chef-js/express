@@ -1,10 +1,11 @@
+import { Config, FileReaderResponse, Server, getUrl } from "chef-core";
+import { debug, folder } from "chef-core/config";
+import express, { NextFunction, Request, Response } from "express";
 import http, { RequestListener } from "http";
-import https from "https";
-import express, { Request, Response } from "express";
+
 import { Cache } from "@pietal.dev/cache";
+import https from "https";
 import { readFileSync } from "fs";
-import { debug } from "chef-core/config";
-import { Config, Server, FileReaderResponse, getUrl } from "chef-core";
 
 export async function createServer(config: Config): Promise<Server> {
   const app: Express.Application = express();
@@ -43,10 +44,15 @@ function createExpressServer(
 }
 
 export function requestHandler(fileReaderCache: Cache<FileReaderResponse>) {
-  return (req: Request, res: Response) => {
+  return (req: Request, res: Response, next: NextFunction) => {
     const url: string = getUrl(req.originalUrl);
-    const { status, mime, body } = fileReaderCache.get(url);
+    if (!url.match(new RegExp(`/${folder}/`))) {
+      next();
 
+      return false;
+    }
+
+    const { status, mime, body } = fileReaderCache.get(url);
     if (debug) {
       console.info(status, mime, url);
     }
@@ -57,5 +63,6 @@ export function requestHandler(fileReaderCache: Cache<FileReaderResponse>) {
     res.writeHead(status);
 
     res.end(body);
+    return true;
   };
 }

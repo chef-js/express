@@ -7,12 +7,12 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createServer = createServer;
 exports.requestHandler = requestHandler;
+const chef_core_1 = require("chef-core");
+const config_1 = require("chef-core/config");
+const express_1 = __importDefault(require("express"));
 const http_1 = __importDefault(require("http"));
 const https_1 = __importDefault(require("https"));
-const express_1 = __importDefault(require("express"));
 const fs_1 = require("fs");
-const config_1 = require("chef-core/config");
-const chef_core_1 = require("chef-core");
 async function createServer(config) {
   const app = (0, express_1.default)();
   const server = createExpressServer(config, app);
@@ -40,8 +40,12 @@ function createExpressServer(config, app) {
   return http_1.default.createServer(app);
 }
 function requestHandler(fileReaderCache) {
-  return (req, res) => {
+  return (req, res, next) => {
     const url = (0, chef_core_1.getUrl)(req.originalUrl);
+    if (!url.match(new RegExp(`/${config_1.folder}/`))) {
+      next();
+      return false;
+    }
     const { status, mime, body } = fileReaderCache.get(url);
     if (config_1.debug) {
       console.info(status, mime, url);
@@ -51,5 +55,6 @@ function requestHandler(fileReaderCache) {
     // write header sets status
     res.writeHead(status);
     res.end(body);
+    return true;
   };
 }
