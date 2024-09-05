@@ -5,7 +5,8 @@ var __importDefault =
     return mod && mod.__esModule ? mod : { default: mod };
   };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.requestHandler = exports.createServer = void 0;
+exports.createServer = createServer;
+exports.requestHandler = requestHandler;
 const http_1 = __importDefault(require("http"));
 const https_1 = __importDefault(require("https"));
 const express_1 = __importDefault(require("express"));
@@ -23,7 +24,6 @@ async function createServer(config) {
   };
   return app;
 }
-exports.createServer = createServer;
 function createExpressServer(config, app) {
   // spread ssl from config
   const { ssl } = config;
@@ -53,4 +53,3 @@ function requestHandler(fileReaderCache) {
     res.end(body);
   };
 }
-exports.requestHandler = requestHandler;
