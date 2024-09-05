@@ -46,12 +46,6 @@ function createExpressServer(
 export function requestHandler(fileReaderCache: Cache<FileReaderResponse>) {
   return (req: Request, res: Response, next: NextFunction) => {
     const url: string = getUrl(req.originalUrl);
-    if (!url.match(new RegExp(`/${folder}/`))) {
-      next();
-
-      return false;
-    }
-
     const { status, mime, body } = fileReaderCache.get(url);
     if (debug) {
       console.info(status, mime, url);
