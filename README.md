@@ -20,7 +20,7 @@ $ npx chef-express folder [--debug] [--ssl] [--port 443] [--maxCacheSize 0]
 $ yarn add chef-express
 ```
 
-Minimal configuration is specifying folder, then it serves it from http://localhost:4200
+Minimal configuration is specifying folder, then it serves it from http://localhost:3000
 
 ```ts
 const startServer = require("chef-express");
