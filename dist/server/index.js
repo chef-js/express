@@ -39,10 +39,14 @@ function createExpressServer(config, app) {
   // else start normal app
   return http_1.default.createServer(app);
 }
-function requestHandler(fileReaderCache) {
-  return (req, res, next) => {
+function requestHandler(cache) {
+  return (req, res) => {
     const url = (0, chef_core_1.getUrl)(req.originalUrl);
-    const { status, mime, body } = fileReaderCache.get(url);
+    const { status, mime, body } = cache.get(url) || {
+      status: 404,
+      mime: "text/plain",
+      body: "",
+    };
     if (config_1.debug) {
       console.info(status, mime, url);
     }

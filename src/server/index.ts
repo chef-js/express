@@ -1,5 +1,5 @@
 import { Config, FileReaderResponse, Server, getUrl } from "chef-core";
-import express, { NextFunction, Request, Response } from "express";
+import express, { Request, Response } from "express";
 import http, { RequestListener } from "http";
 
 import { Cache } from "@pietal.dev/cache";
@@ -43,10 +43,15 @@ function createExpressServer(
   return http.createServer(app);
 }
 
-export function requestHandler(fileReaderCache: Cache<FileReaderResponse>) {
-  return (req: Request, res: Response, next: NextFunction) => {
-    const url: string = getUrl(req.originalUrl);
-    const { status, mime, body } = fileReaderCache.get(url);
+export function requestHandler(cache: Cache<FileReaderResponse>) {
+  return (req: Request, res: Response) => {
+    const url = getUrl(req.originalUrl);
+    const { status, mime, body } = cache.get(url) || {
+      status: 404,
+      mime: "text/plain",
+      body: "",
+    };
+
     if (debug) {
       console.info(status, mime, url);
     }
