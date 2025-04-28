@@ -1,8 +1,9 @@
-import { chef, Config } from "chef-core";
+import { type Config, config, cook as core } from "chef-core";
 import { createServer, requestHandler } from "./server";
+export { config, type Config };
 
-export default async function startChef(config?: Partial<Config>) {
-  return await chef(
+export async function cook(config: Partial<Config> = {}) {
+  return await core(
     { ...config, type: "express" },
     { createServer, requestHandler },
   );

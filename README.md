@@ -23,10 +23,10 @@ $ yarn add chef-express
 Minimal configuration is specifying folder, then it serves it from http://localhost:3000
 
 ```ts
-const startServer = require("chef-express");
+const { cook } = require("chef-express");
 const config = { folder: "docs" };
 
-startServer(config).then((server: Express.Application) => {
+cook(config).then((server: Express.Application) => {
   // server router api is get, post, any
   server.any("/*", (req: Express.Request, res: Express.Response) => {
     res.end("200 OK");
