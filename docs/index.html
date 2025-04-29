@@ -128,25 +128,32 @@
           <pre><code class="bash"><span class="hl-0">$</span><span class="hl-1"> </span><span class="hl-2">npx</span><span class="hl-1"> </span><span class="hl-2">chef-express</span><span class="hl-1"> </span><span class="hl-2">folder</span><span class="hl-1"> [--debug] [--ssl] [--port 443] [--maxCacheSize 0]</span>
 </code><button type="button">Copy</button></pre>
 
-          <h2 id="installation" class="tsd-anchor-link">
-            Installation<a
-              href="#installation"
+          <h2 id="using-as-a-library" class="tsd-anchor-link">
+            Using as a library<a
+              href="#using-as-a-library"
               aria-label="Permalink"
               class="tsd-anchor-icon"
               ><svg viewBox="0 0 24 24" aria-hidden="true">
                 <use href="assets/icons.svg#icon-anchor"></use></svg
             ></a>
           </h2>
-          <pre><code class="bash"><span class="hl-0">$</span><span class="hl-1"> </span><span class="hl-2">yarn</span><span class="hl-1"> </span><span class="hl-2">add</span><span class="hl-1"> </span><span class="hl-2">chef-express</span>
+          <pre><code class="ts"><span class="hl-3">const</span><span class="hl-1"> { </span><span class="hl-4">cook</span><span class="hl-1"> } = </span><span class="hl-0">require</span><span class="hl-1">(</span><span class="hl-2">&quot;chef-express&quot;</span><span class="hl-1">);</span><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-4">config</span><span class="hl-1"> = </span><span class="hl-0">require</span><span class="hl-1">(</span><span class="hl-2">&quot;./your-config&quot;</span><span class="hl-1">);</span><br/><br/><span class="hl-0">cook</span><span class="hl-1">(</span><span class="hl-5">config</span><span class="hl-1">).</span><span class="hl-0">then</span><span class="hl-1">((</span><span class="hl-5">server</span><span class="hl-1">: </span><span class="hl-6">Express</span><span class="hl-1">.</span><span class="hl-6">Application</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-7">// server api is get, post, any</span><br/><span class="hl-1">  </span><span class="hl-5">server</span><span class="hl-1">.</span><span class="hl-0">any</span><span class="hl-1">(</span><span class="hl-2">&quot;/*&quot;</span><span class="hl-1">, (</span><span class="hl-5">req</span><span class="hl-1">: </span><span class="hl-6">Express</span><span class="hl-1">.</span><span class="hl-6">Request</span><span class="hl-1">, </span><span class="hl-5">res</span><span class="hl-1">: </span><span class="hl-6">Express</span><span class="hl-1">.</span><span class="hl-6">Response</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-5">res</span><span class="hl-1">.</span><span class="hl-0">end</span><span class="hl-1">(</span><span class="hl-2">&quot;200 OK&quot;</span><span class="hl-1">);</span><br/><span class="hl-1">  });</span><br/><span class="hl-1">});</span>
 </code><button type="button">Copy</button></pre>
 
-          <p>
-            Minimal configuration is specifying folder, then it serves it from
-            <a href="http://localhost:3000">http://localhost:3000</a>
-          </p>
-          <pre><code class="ts"><span class="hl-3">const</span><span class="hl-1"> { </span><span class="hl-4">cook</span><span class="hl-1"> } = </span><span class="hl-0">require</span><span class="hl-1">(</span><span class="hl-2">&quot;chef-express&quot;</span><span class="hl-1">);</span><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-4">config</span><span class="hl-1"> = { </span><span class="hl-5">folder:</span><span class="hl-1"> </span><span class="hl-2">&quot;docs&quot;</span><span class="hl-1"> };</span><br/><br/><span class="hl-0">cook</span><span class="hl-1">(</span><span class="hl-5">config</span><span class="hl-1">).</span><span class="hl-0">then</span><span class="hl-1">((</span><span class="hl-5">server</span><span class="hl-1">: </span><span class="hl-6">Express</span><span class="hl-1">.</span><span class="hl-6">Application</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-7">// server router api is get, post, any</span><br/><span class="hl-1">  </span><span class="hl-5">server</span><span class="hl-1">.</span><span class="hl-0">any</span><span class="hl-1">(</span><span class="hl-2">&quot;/*&quot;</span><span class="hl-1">, (</span><span class="hl-5">req</span><span class="hl-1">: </span><span class="hl-6">Express</span><span class="hl-1">.</span><span class="hl-6">Request</span><span class="hl-1">, </span><span class="hl-5">res</span><span class="hl-1">: </span><span class="hl-6">Express</span><span class="hl-1">.</span><span class="hl-6">Response</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-5">res</span><span class="hl-1">.</span><span class="hl-0">end</span><span class="hl-1">(</span><span class="hl-2">&quot;200 OK&quot;</span><span class="hl-1">);</span><br/><span class="hl-1">  });</span><br/><span class="hl-1">});</span>
-</code><button type="button">Copy</button></pre>
-
+          <ul>
+            <li>
+              minimal configuration is zero configuration (<code>{}</code>)
+            </li>
+            <li>
+              if <code>folder</code> param is omitted default
+              <code>index.html</code> is read from <code>folder = '.'</code>
+            </li>
+            <li>
+              serves from
+              <a href="http://localhost:3000">http://localhost:3000</a> unless
+              <code>port</code> specified
+            </li>
+          </ul>
           <h2 id="license" class="tsd-anchor-link">
             License<a
               href="#license"
@@ -313,7 +320,9 @@
                   >
                 </li>
                 <li>
-                  <a href="#installation"><span>Installation</span></a>
+                  <a href="#using-as-a-library"
+                    ><span>Using as a library</span></a
+                  >
                 </li>
                 <li>
                   <a href="#license"><span>License</span></a>

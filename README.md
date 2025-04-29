@@ -15,25 +15,23 @@
 $ npx chef-express folder [--debug] [--ssl] [--port 443] [--maxCacheSize 0]
 ```
 
-## Installation
-
-```bash
-$ yarn add chef-express
-```
-
-Minimal configuration is specifying folder, then it serves it from http://localhost:3000
+## Using as a library
 
 ```ts
 const { cook } = require("chef-express");
-const config = { folder: "docs" };
+const config = require("./your-config");
 
 cook(config).then((server: Express.Application) => {
-  // server router api is get, post, any
+  // server api is get, post, any
   server.any("/*", (req: Express.Request, res: Express.Response) => {
     res.end("200 OK");
   });
 });
 ```
+
+- minimal configuration is zero configuration (`{}`)
+- if `folder` param is omitted default `index.html` is read from `folder = '.'`
+- serves from http://localhost:3000 unless `port` specified
 
 ## License
 
