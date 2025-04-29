@@ -9,13 +9,13 @@
 
 - `express` for routing
 
-## Using CLI
+## Serve folder CLI
 
 ```bash
 $ npx chef-express folder
 ```
 
-## Using as a library
+## Serve folder node.js
 
 ```ts
 const { cook } = require("chef-express");
@@ -32,6 +32,13 @@ cook(config).then((server: Express.Application) => {
 - minimal configuration is zero configuration, all values have defaults
 - if `folder` param is omitted default `index.html` is read from `folder = '.'`
 - serves from http://localhost:3000 unless `port` specified
+
+## Configuration
+
+For more information about config parameters read:
+
+- The default configuration https://github.com/chef-js/core#configuration
+- The parameters types https://chef-js.github.io/core/types/Config.html
 
 ## License
 
