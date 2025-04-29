@@ -9,17 +9,17 @@
 
 - `express` for routing
 
-## Command-Line Running
+## Using CLI
 
 ```bash
-$ npx chef-express folder [--debug] [--ssl] [--port 443] [--maxCacheSize 0]
+$ npx chef-express folder
 ```
 
 ## Using as a library
 
 ```ts
 const { cook } = require("chef-express");
-const config = require("./your-config");
+const { folder: "folder" }
 
 cook(config).then((server: Express.Application) => {
   // server api is get, post, any
@@ -29,7 +29,7 @@ cook(config).then((server: Express.Application) => {
 });
 ```
 
-- minimal configuration is zero configuration (`{}`)
+- minimal configuration is zero configuration, all values have defaults
 - if `folder` param is omitted default `index.html` is read from `folder = '.'`
 - serves from http://localhost:3000 unless `port` specified
 
