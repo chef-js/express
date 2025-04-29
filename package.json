@@ -1,6 +1,6 @@
 {
   "name": "chef-express",
-  "version": "3.1.8",
+  "version": "3.2.0",
   "description": "static files server = chef-express",
   "keywords": [
     "chef-js",
@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@pietal.dev/cache": "^2.0.2",
-    "chef-core": "^4.1.9",
+    "chef-core": "^4.2.0",
     "express": "^4"
   },
   "devDependencies": {
